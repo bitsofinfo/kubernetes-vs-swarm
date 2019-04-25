@@ -4,8 +4,9 @@ Simple examples for launching an app on Kubernetes and Docker Swarm to see the d
 
 ## Prerequisites
 
-You should have Docker for Mac/Windows installed with Kubernetes enabled. DO NOT
-enable the "Deploy Docker Stacks to Kubernetes by Default" option
+You should have Docker for Mac/Windows installed with Kubernetes enabled.
+
+DO NOT enable the *"Deploy Docker Stacks to Kubernetes by Default"* option
 
 ## Example
 
