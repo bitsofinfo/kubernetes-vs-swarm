@@ -3,6 +3,8 @@
 This project presents a very simple tutorial demonstrating deploying an app to both
 Kubernetes and Docker Swarm to demonstrate the differences.
 
+https://bitsofinfo.wordpress.com/2019/01/16/kubernetes-vs-swarm-the-most-basic-primer/
+
 This example launches the following:
 * Docker Service named `nginx1_app` available at published Swarm port: `30080`
 * Kubernetes Deployment named `nginx1` available on `NodePort` `30081`
