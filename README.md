@@ -40,7 +40,7 @@ Docker Service (via stack)
 docker stack deploy -c swarm-nginx1.yaml nginx1
 docker service ls
 docker service inspect nginx1_app
-docker service logs --tail 100 --follow (docker service ps nginx1_app | grep nginx1 | awk '{print $1; exit}')
+docker service logs --tail 100 --follow $(docker service ps nginx1_app | grep nginx1 | awk '{print $1; exit}')
 ```
 
 Kubernetes
@@ -48,19 +48,19 @@ Kubernetes
 kubectl create -f kubernetes-nginx1.yaml
 kubectl get all
 kubectl describe pod nginx1
-kubectl logs --tail 100 --follow (kubectl get pods | grep nginx1 | awk '{print $1; exit}')
+kubectl logs --tail 100 --follow $(kubectl get pods | grep nginx1 | awk '{print $1; exit}')
 ```
 
 ### Shell into one of the replicas:
 
 Docker Swarm
 ```
-docker exec -it (docker ps | grep nginx1_app | awk '{print $1; exit}') /bin/bash
+docker exec -it $(docker ps | grep nginx1_app | awk '{print $1; exit}') /bin/bash
 ```
 
 Kubernetes
 ```
-docker exec -it (docker ps | grep k8s_nginx1 | awk '{print $1; exit}') /bin/bash
+docker exec -it $(docker ps | grep k8s_nginx1 | awk '{print $1; exit}') /bin/bash
 ```
 
 Once inside a container
