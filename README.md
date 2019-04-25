@@ -9,7 +9,7 @@ enable the "Deploy Docker Stacks to Kubernetes by Default" option
 
 ## Example
 
-1. Lets create some NGINX document root volumes with an `index.html`.
+### Lets create some NGINX document root volumes with an `index.html`.
 ```
 mkdir -p /tmp/k8-nginxdocroot
 echo "k8 nginx" > /tmp/k8-nginxdocroot/index.html
@@ -18,7 +18,7 @@ mkdir -p /tmp/swarm-nginxdocroot
 echo "swarm nginx" > /tmp/swarm-nginxdocroot/index.html
 ```
 
-2. Create our "secret" values:
+### Create our "secret" values:
 
 **Docker Secret**
 ```
@@ -33,7 +33,7 @@ kubectl get secret mynginx-secret -o yaml
 kubectl describe secret mynginx-secret
 ```
 
-3. Launch our app on Docker Swarm as a Service, view and check logs
+### Launch our app on Docker Swarm as a Service, view and check logs
 
 Docker Service (via stack)
 ```
@@ -51,7 +51,7 @@ kubectl describe pod nginx1
 kubectl logs --tail 100 --follow (kubectl get pods | grep nginx1 | awk '{print $1; exit}')
 ```
 
-4. Shell into one of the replicas:
+### Shell into one of the replicas:
 
 Docker Swarm
 ```
@@ -71,7 +71,7 @@ env | grep SECRET_PATH
 cat $SECRET_PATH
 ```
 
-5. Curl it!
+### Curl it!
 
 Docker Swarm
 ```
@@ -83,7 +83,7 @@ Kubernetes
 curl http://localhost:30081
 ```
 
-6. Scale it
+### Scale it
 
 Docker Swarm
 ```
@@ -98,7 +98,7 @@ kubectl get pods
 kubectl describe deployment nginx1
 ```
 
-7. Remove
+### Remove
 
 Docker Swarm
 ```
