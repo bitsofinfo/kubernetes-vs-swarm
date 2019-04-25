@@ -7,6 +7,13 @@ This example launches the following:
 * Docker Service named `nginx1_app` available at published Swarm port: `30080`
 * Kubernetes Deployment named `nginx1` available on `NodePort` `30081`
 
+Each app has the following characteristics:
+* 2+ replicas
+* Published on a fixed high port on all nodes
+* Mounting an external volume
+* Access to a "secret"
+* Configured with a *"healthcheck"*
+
 ## Prerequisites
 
 You should have Docker for Mac/Windows installed with Kubernetes enabled.
@@ -15,7 +22,7 @@ DO NOT enable the *"Deploy Docker Stacks to Kubernetes by Default"* option
 
 ## Example
 
-### Lets create some NGINX document root volumes with an `index.html`.
+### Prep the NGINX doc root volumes
 ```
 mkdir -p /tmp/k8-nginxdocroot
 echo "k8 nginx" > /tmp/k8-nginxdocroot/index.html
