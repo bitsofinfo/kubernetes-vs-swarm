@@ -128,3 +128,5 @@ kubectl delete -f kubernetes-nginx1.yaml
 kubectl delete secret mynginx-secret
 kubectl get all
 ```
+
+![Diagram](/diag.png "Diagram1")
