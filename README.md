@@ -20,13 +20,13 @@ echo "swarm nginx" > /tmp/swarm-nginxdocroot/index.html
 
 ### Create our "secret" values:
 
-**Docker Secret**
+Docker Secret
 ```
 docker secret create nginx1_secret ./secret.txt
 docker secret ls
 ```
 
-**Kubernetes**
+Kubernetes
 ```
 kubectl create secret generic mynginx-secret --from-file=./secret.txt
 kubectl get secret mynginx-secret -o yaml
