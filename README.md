@@ -3,6 +3,8 @@
 This project presents a very simple tutorial demonstrating deploying an app to both
 Kubernetes and Docker Swarm to demonstrate the differences.
 
+![Diagram](/diag.png "Diagram1")
+
 https://bitsofinfo.wordpress.com/2019/01/16/kubernetes-vs-swarm-the-most-basic-primer/
 
 This example launches the following:
@@ -128,5 +130,3 @@ kubectl delete -f kubernetes-nginx1.yaml
 kubectl delete secret mynginx-secret
 kubectl get all
 ```
-
-![Diagram](/diag.png "Diagram1")
