@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx1
+spec:
+  selector:
+    app: nginx1
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 8081
+    targetPort: 80
+    nodePort: 30081
+
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: nginx1-vol1
+  labels:
+    type: local
+    app: "nginx1"
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2m
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/tmp/k8-nginxdocroot"
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nginx1-vol1-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  selector:
+    matchLabels:
+      app: "nginx1"
+  resources:
+    requests:
+      storage: 1m
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx1
+  labels:
+    app: nginx1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx1
+  template:
+    metadata:
+      labels:
+        app: nginx1
+    spec:
+      volumes:
+        - name: nginx1-data
+          persistentVolumeClaim:
+            claimName: nginx1-vol1-claim
+        - name: mynginx-secret
+          secret:
+            secretName: mynginx-secret
+      containers:
+        - name: nginx1
+          image: rstarmer/nginx-curl:latest
+          volumeMounts:
+            - name: nginx1-data
+              mountPath: "/usr/share/nginx/html"
+            - name: mynginx-secret
+              mountPath: "/tmp/secrets"
+              readOnly: true
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /index.html
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 2
+          env:
+            - name: SOME_ENV_VAR
+              value: "hello"
+            - name: SECRET_PATH
+              value: "/tmp/secrets/secret.txt"

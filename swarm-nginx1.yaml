@@ -1,0 +1,30 @@
+
+version: "3.7"
+
+# echo -n "ngswarm-secret" | docker secret create mynginx_secret -
+# will be available at /run/secrets/my_secret
+secrets:
+  nginx1_secret:
+    external:
+      name: "nginx1_secret"
+
+services:
+  app:
+    image: rstarmer/nginx-curl
+    deploy:
+      replicas: 2
+    ports:
+      - "30080:80"
+    secrets:
+      - nginx1_secret
+    volumes:
+      - /tmp/swarm-nginxdocroot:/usr/share/nginx/html
+    healthcheck:
+      test: curl -k -s --connect-timeout 2 --max-time 2 'http://localhost:80/index.html' | grep nginx
+      interval: 5s
+      timeout: 5s
+      retries: 2
+      start_period: 10s
+    environment:
+      SOME_ENV_VAR: "hello"
+      SECRET_PATH: "/run/secrets/nginx1_secret"
