@@ -1,6 +1,7 @@
 # kubernetes-vs-swarm
 
-Simple example for launching an NGINX app on both Kubernetes and Docker Swarm to see the differences
+This project presents a very simple tutorial demonstrating deploying an app to both
+Kubernetes and Docker Swarm to demonstrate the differences.
 
 This example launches the following:
 * Docker Service named `nginx1_app` available at published Swarm port: `30080`
