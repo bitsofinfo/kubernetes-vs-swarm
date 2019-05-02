@@ -76,8 +76,8 @@ docker exec -it $(docker ps | grep nginx1_app | awk '{print $1; exit}') /bin/bas
 ```
 
 Kubernetes
-```
-docker exec -it $(docker ps | grep k8s_nginx1 | awk '{print $1; exit}') /bin/bash
+``` 
+kubectl exec -it $(kubectl get pods | grep nginx1 | awk '{print $1; exit}') -- /bin/bash
 ```
 
 Once inside a container
@@ -122,6 +122,7 @@ Docker Swarm
 docker service rm nginx1_app
 docker secret rm nginx1_secret
 docker service ls
+rm -rf /tmp/swarm-nginxdocroot
 ```
 
 Kubernetes
@@ -129,4 +130,5 @@ Kubernetes
 kubectl delete -f kubernetes-nginx1.yaml
 kubectl delete secret mynginx-secret
 kubectl get all
+rm -rf /tmp/k8-nginxdocroot/
 ```
