@@ -24,6 +24,8 @@ You should have Docker for Mac/Windows installed with Kubernetes enabled.
 
 DO NOT enable the *"Deploy Docker Stacks to Kubernetes by Default"* option
 
+You've done `swarm init` on your local Docker 
+
 ## Example
 
 ### Prep the NGINX doc root volumes
@@ -76,7 +78,7 @@ docker exec -it $(docker ps | grep nginx1_app | awk '{print $1; exit}') /bin/bas
 ```
 
 Kubernetes
-``` 
+```
 kubectl exec -it $(kubectl get pods | grep nginx1 | awk '{print $1; exit}') -- /bin/bash
 ```
 
